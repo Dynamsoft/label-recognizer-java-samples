@@ -61,7 +61,7 @@ public class PassportMRZReading {
                 // 1.Initialize license.
                 // The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
                 // If you want to use an offline license, please contact Dynamsoft Support: https://www.dynamsoft.com/company/contact/
-                // You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dlr&utm_source=github&package=java
+                // You can also request a 30-day trial license via the link: https://www.dynamsoft.com/customer/license/trialLicense?product=dlr&utm_source=github&package=java
                 LabelRecognizer.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
                 
                 // 2. Create an instance of Label Recognizer.
@@ -82,8 +82,8 @@ public class PassportMRZReading {
                     if (results[0].lineResults.length == 2){
                         String MRZCode_1 = results[0].lineResults[0].text;
                         String MRZCode_2 = results[0].lineResults[1].text;
-                        String regex_1 = "P[OM<](?<nationality>[A-Z]{3})(?<name>[A-Z<]{39})";
-                        String regex_2 = "(?<number>[A-Z0-9<]{9})[0-9](?<nationality>[A-Z]{3})(?<birth>[0-9]{2}[0-1][0-9][0-3][0-9])[0-9](?<sex>[MF>])(?<expiry>[0-9]{2}[0-1][0-9][0-3][0-9])[0-9][A-Z0-9<]{14}[0-9][0-9]";
+                        String regex_1 = "P[A-Z<](?<nationality>[A-Z<]{3})(?<name>[A-Z<]{39})";
+                        String regex_2 = "(?<number>[A-Z0-9<]{9})[0-9](?<nationality>[A-Z<]{3})(?<birth>[0-9]{2}[0-1][0-9][0-3][0-9])[0-9](?<sex>[MF>])(?<expiry>[0-9]{2}[0-1][0-9][0-3][0-9])[0-9][A-Z0-9<]{14}[0-9<][0-9]";
                         String nationality = null;
                         String name = null;
                         String number = null;
@@ -106,11 +106,16 @@ public class PassportMRZReading {
                             if(matcher_1.find()){
                                 nationality = matcher_1.group("nationality");
                                 name = matcher_1.group("name");
+                                
                                 String[] nameArr = name.split("<<");
-                                if (nationality.equals("CHN")){
-                                    name = nameArr[0].replaceAll("<"," ")+" "+nameArr[1].replaceAll("<"," ");
-                                }else {
-                                    name = nameArr[1].replaceAll("<"," ")+" "+nameArr[0].replaceAll("<"," ");
+                                if(nameArr.length == 1)
+                                	name = nameArr[0].replaceAll("<"," ");
+                                else if(nameArr.length >= 2){
+	                                if (nationality.equals("CHN")){
+	                                    name = nameArr[0].replaceAll("<"," ")+" "+nameArr[1].replaceAll("<"," ");
+	                                }else {
+	                                    name = nameArr[1].replaceAll("<"," ")+" "+nameArr[0].replaceAll("<"," ");
+	                                }
                                 }
                             }
                             if(matcher_2.find()){

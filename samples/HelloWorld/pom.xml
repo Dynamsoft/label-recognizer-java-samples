@@ -9,18 +9,14 @@
 	<repositories>
 		<repository>
 			<id>dlr</id>
-			<url>https://download2.dynamsoft.com/maven/dlr/jar</url>
-		</repository>
-		<repository>
-			<id>dc</id>
-			<url>https://download2.dynamsoft.com/maven/dc/jar</url>
+			<url>https://download2.dynamsoft.com/maven/jar</url>
 		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>com.dynamsoft</groupId>
 			<artifactId>dlr</artifactId>
-			<version>2.0.0</version>
+			<version>2.2.10</version>
 		</dependency>
 		<dependency>
 			<groupId>com.dynamsoft</groupId>

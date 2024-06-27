@@ -7,14 +7,14 @@ public class HelloWorld {
 			// 1.Initialize license.
 			// The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
 			// If you want to use an offline license, please contact Dynamsoft Support: https://www.dynamsoft.com/company/contact/
-			// You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dlr&utm_source=github&package=java
+			// You can also request a 30-day trial license via the link: https://www.dynamsoft.com/customer/license/trialLicense?product=dlr&utm_source=github&package=java
 			LabelRecognizer.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
 			
 		    // 2.Create an instance of Label Recognizer.
 			LabelRecognizer dlr = new LabelRecognizer();
 			
 	        // 3.Recognize text from an image file.
-			DLRResult[] results = dlr.recognizeByFile("../../images/dlr-sample-vin.png", "");
+			DLRResult[] results = dlr.recognizeByFile("../../images/dlr-sample.png", "");
 			
 			if (results != null && results.length > 0) {
 				for (int i = 0; i < results.length; i++) {
